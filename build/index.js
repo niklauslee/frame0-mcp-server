@@ -531,10 +531,26 @@ server.tool("delete_shape", "Delete a shape in Frame0.", { shapeId: z.string().d
         return response.error(`Failed to delete shape: ${error}`);
     }
 });
-server.tool("get_available_icons", "Get available icon shapes in Frame0.", {}, async ({}) => {
+server.tool("get_available_icons", "Get available icon shapes in Frame0.", {
+    search: z
+        .string()
+        .optional()
+        .describe("Search term to filter icon by name or tags (case-insensitive)"),
+}, async ({ search }) => {
     try {
         const data = await command(apiPort, "shape:get-available-icons", {});
-        return response.text("Available icons: " + JSON.stringify(data));
+        const icons = Array.isArray(data) ? data : [];
+        const filtered = search
+            ? icons.filter((icon) => {
+                if (typeof icon !== "object" || !icon.name || !Array.isArray(icon.tags)) {
+                    return false;
+                }
+                const searchLower = search.toLowerCase();
+                return (icon.name.toLowerCase().includes(searchLower) ||
+                    icon.tags.some((tag) => tag.toLowerCase().includes(searchLower)));
+            })
+            : icons;
+        return response.text("Available icons: " + JSON.stringify(filtered));
     }
     catch (error) {
         console.error(error);

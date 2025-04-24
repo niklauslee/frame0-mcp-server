@@ -48,7 +48,7 @@ You can use `--api-port=<port>` optional parameter to use another port number fo
 - `update_shape`
 - `duplicate_shape`
 - `delete_shape`
-- `get_available_icons`
+- `get_available_icons` (supports optional `search` parameter to filter icons by name or tag)
 - `move_shape`
 - `align_shapes`
 - `group`

@@ -719,11 +719,29 @@ server.tool(
 server.tool(
   "get_available_icons",
   "Get available icon shapes in Frame0.",
-  {},
-  async ({}) => {
+  {
+    search: z
+      .string()
+      .optional()
+      .describe("Search term to filter icon by name or tags (case-insensitive)"),
+  },
+  async ({ search }) => {
     try {
       const data = await command(apiPort, "shape:get-available-icons", {});
-      return response.text("Available icons: " + JSON.stringify(data));
+      const icons = Array.isArray(data) ? data : [];
+      const filtered = search
+        ? icons.filter((icon: { name: string; tags: string[] }) => {
+            if (typeof icon !== "object" || !icon.name || !Array.isArray(icon.tags)) {
+              return false;
+            }
+            const searchLower = search.toLowerCase();
+            return (
+              icon.name.toLowerCase().includes(searchLower) ||
+              icon.tags.some((tag: string) => tag.toLowerCase().includes(searchLower))
+            );
+          })
+        : icons;
+      return response.text("Available icons: " + JSON.stringify(filtered));
     } catch (error) {
       console.error(error);
       return response.error(`Failed to get available icons: ${error}`);
