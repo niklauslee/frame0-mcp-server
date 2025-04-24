@@ -851,7 +851,7 @@ server.tool("export_page_as_image", "Export page as image in Frame0.", {
 async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error("Weather MCP Server running on stdio");
+    console.error("Frame0 MCP Server running on stdio");
 }
 main().catch((error) => {
     console.error("Error starting server:", error);
