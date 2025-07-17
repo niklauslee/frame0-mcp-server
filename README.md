@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/niklauslee-frame0-mcp-server-badge.png)](https://mseep.ai/app/niklauslee-frame0-mcp-server)
+
 [![Frame0 MCP Video Example](https://github.com/niklauslee/frame0-mcp-server/raw/main/thumbnail.png)](https://frame0.app/videos/frame0-mcp-example.mp4)
 
 # Frame0 MCP Server
