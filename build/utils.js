@@ -23,11 +23,37 @@ export const ARROWHEADS = [
     "triangle",
     "triangle-filled",
 ];
+let apiToken = null;
+async function checkApiToken(port) {
+    if (apiToken)
+        return;
+    const res = await fetch(`${URL}:${port}/request_api_token`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            appName: "Frame0 MCP Server",
+        }),
+    });
+    if (!res.ok) {
+        apiToken = null;
+        throw new Error("Failed to request API token");
+    }
+    const json = (await res.json());
+    if (!json.success) {
+        apiToken = null;
+        throw new Error(`Request API token failed: ${json.error}`);
+    }
+    apiToken = json.data;
+}
 export async function command(port, command, args = {}) {
+    await checkApiToken(port);
     const res = await fetch(`${URL}:${port}/execute_command`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${apiToken}`,
         },
         body: JSON.stringify({
             command,

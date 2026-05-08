@@ -9,7 +9,8 @@
 ## Setup
 
 Prerequisite:
-- [Frame0](https://frame0.app/) `v1.0.0-beta.17` or higher.
+
+- [Frame0](https://frame0.app/) `v1.7.0` or higher. (Ensure that **Run on start** option is enabled in _Settings_ > _API Server_).
 - [Node.js](https://nodejs.org/) `v22` or higher.
 
 Setup for Claude Desktop in `claude_desktop_config.json` as below:
