@@ -1,4 +1,4 @@
-[![smithery badge](https://smithery.ai/badge/@niklauslee/frame0-mcp-server)](https://smithery.ai/server/@niklauslee/frame0-mcp-server)
+[![LightNow capabilities](https://lightnow.ai/badge/io.github.niklauslee/frame0-mcp-server)](https://lightnow.ai/servers/io.github.niklauslee/frame0-mcp-server)
 
 [![Frame0 MCP Video Example](https://github.com/niklauslee/frame0-mcp-server/raw/main/thumbnail.png)](https://frame0.app/videos/frame0-mcp-example.mp4)
 
